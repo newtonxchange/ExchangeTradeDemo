@@ -20,8 +20,9 @@ You will need the following installed on your system before being able to run th
 
 ### 先决条件
 在运行此程序之前，您需要在系统上安装以下软件。
-Node.js
-本地转发或未阻止端口3000端口。
+
+* Node.js (https://nodejs.org)
+* 本地转发或未阻止端口3000端口。
 
 
 ### Installing

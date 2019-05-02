@@ -50,15 +50,19 @@ Then just fill in the required data to begin the demo.
 安装ExchangeDemoAPI的最简单方法是从GitHub存储库克隆它：
 
 git clone https://github.com/newtonxchange/ExchangeTradeDemo.git
+
 然后，您需要做的就是安装node_modules
 
 npm安装
+
 之后就运行了
 
 npm跑步开始
+
 打开浏览器，导航到
 
 http://127.0.0.1:3000
+
 然后只需填写所需数据即可开始演示。
 
 ## Running the demos

@@ -58,6 +58,7 @@ npm install
 之后就运行了
 
 npm run start
+
 打开浏览器，导航到
 
 http://127.0.0.1:3000

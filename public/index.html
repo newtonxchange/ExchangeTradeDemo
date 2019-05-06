@@ -23,134 +23,128 @@
     </script>
 </head>
 <body ms-controller="index">
-<form id="form">
-    <fieldset>
-        <legend>Settings:</legend>
-        <select id="crypto_pair" name="crypto_pair" ms-duplex="crypto_pair">
-            <option value="BTC/USDT">BTC/USDT</option>
-            <option value="ETH/USDT">ETH/USDT</option>
-            <option value="XRP/USDT">XRP/USDT</option>
-            <option value="BCH/USDT">BCH/USDT</option>
-        </select>
-        <br><br>
+<div id="demo">
+    <form id="form">
         <fieldset>
-            <legend>Newton:</legend>
-            <input type="hidden" name="first_exchange" value="newton"/>
-            <input type="text" name="first_api_key" placeholder="API Key" style="margin-right: 10px;"
-                   ms-duplex="first.api_key"/>
-            <input type="password" name="first_secret_key" placeholder="Secret Key"
-                   ms-duplex="first.secret_key"/>
-        </fieldset>
-        <fieldset>
-            <legend>Exchange:</legend>
-            <select id="second_exchange" name="second_exchange">
-                <option value="huobi">Huobi</option>
-                <option value="binance">Binance</option>
-                <option value="bittrex">Bittrex</option>
-                <option value="cointiger">Cointiger</option>
+            <legend>Settings:</legend>
+            <select id="crypto_pair" name="crypto_pair" ms-duplex="crypto_pair">
+                <option value="BTC/USDT">BTC/USDT</option>
+                <option value="ETH/USDT">ETH/USDT</option>
+                <option value="XRP/USDT">XRP/USDT</option>
+                <option value="BCH/USDT">BCH/USDT</option>
             </select>
-            <br><br>
-            <input type="text" name="second_api_key" placeholder="API Key" style="margin-right: 10px;"
-                   ms-duplex="second.api_key"/>
-            <input type="password" name="second_secret_key" placeholder="Secret Key"
-                   ms-duplex="second.secret_key"/>
+            <fieldset>
+                <legend>Newton:</legend>
+                <input type="hidden" name="first_exchange" value="newton"/>
+                <input type="text" name="first_api_key" placeholder="API Key" style="margin-right: 10px;"
+                       ms-duplex="first.api_key"/>
+                <input type="password" name="first_secret_key" placeholder="Secret Key"
+                       ms-duplex="first.secret_key"/>
+            </fieldset>
+            <fieldset>
+                <legend>Exchange:</legend>
+                <select id="second_exchange" name="second_exchange" ms-duplex="second.id">
+                    <option value="huobi">Huobi</option>
+                    <option value="binance">Binance</option>
+                    <option value="bittrex">Bittrex</option>
+                </select>
+                <input type="text" name="second_api_key" placeholder="API Key" style="margin-right: 10px;"
+                       ms-duplex="second.api_key"/>
+                <input type="password" name="second_secret_key" placeholder="Secret Key"
+                       ms-duplex="second.secret_key"/>
+            </fieldset>
         </fieldset>
-    </fieldset>
-</form>
-<br><br>
-<div class="tab">
-    <button class="tablinks active" onclick="openExample(event, 'trade')">Auto Trade</button>
-    <button class="tablinks" onclick="openExample(event, 'lookup_info')">Account Info</button>
-</div>
-<div id="trade" class="tabcontent" style="display: block">
-    <div style="display: block">
-        <div style="display: inline-block; width: 30%; float: left;">
-            <div class="bar" style="background-color: orange;"></div>
-            <table style="width: 100%; text-align: center;">
-                <tr>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                </tr>
-                <tr ms-for="el in @first.trades" ms-css="{color: @el.color}">
-                    <td>{{el.price}}</td>
-                    <td>{{el.quantity}}</td>
-                </tr>
-            </table>
-        </div>
-        <div style="display: inline-block; text-align: center; width: 40%">
-            <button type="button" ms-on-click="toggle()" style="width:100%">{{process.status}}</button>
-            <br>
-            <h2>Profit made: {{profit}}</h2>
-            <div style="overflow-y: scroll; height: 200px">
+    </form>
+    <div class="tab">
+        <button class="tablinks active" onclick="openExample(event, 'trade')">Auto Trade</button>
+        <button class="tablinks" onclick="openExample(event, 'lookup_info')">Account Info</button>
+    </div>
+    <div id="trade" class="tabcontent" style="display: block">
+        <div style="display: block">
+            <div style="display: inline-block; width: 30%; float: left;">
+                <div class="bar" style="background-color: orange;"></div>
                 <table style="width: 100%; text-align: center;">
                     <tr>
-                        <th style="color: orange;">{{first.name}}</th>
-                        <th style="color: dodgerblue;">{{second.name}}</th>
+                        <th>Price</th>
                         <th>Quantity</th>
-                        <th>Profit</th>
                     </tr>
-                    <tr ms-for="el in @trades">
-                        <td ms-attr="{style:'color: ' + (el.first? '#00FF00' : '#FF0000')}">{{(el.first? el.buyPrice : el.sellPrice)}}</td>
-                        <td ms-attr="{style:'color: ' + (el.first? '#FF0000' : '#00FF00')}">{{(el.first? el.sellPrice : el.buyPrice)}}</td>
+                    <tr ms-for="el in @first.trades" ms-css="{color: @el.color}">
+                        <td>{{el.price}}</td>
                         <td>{{el.quantity}}</td>
-                        <td>{{el.profit}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div style="display: inline-block; text-align: center; width: 40%">
+                <button type="button" ms-on-click="toggle()" style="width:100%">{{process.status}}</button>
+                <br>
+                <h2>Profit made: {{profit}}</h2>
+                <div style="overflow-y: scroll; height: 200px">
+                    <table style="width: 100%; text-align: center;">
+                        <tr>
+                            <th style="color: orange;">{{first.name}}</th>
+                            <th style="color: dodgerblue;">{{second.name}}</th>
+                            <th>Quantity</th>
+                            <th>Profit</th>
+                        </tr>
+                        <tr ms-for="el in @trades">
+                            <td ms-attr="{style:'color: ' + (el.first? '#00FF00' : '#FF0000')}">{{(el.first? el.buyPrice : el.sellPrice)}}</td>
+                            <td ms-attr="{style:'color: ' + (el.first? '#FF0000' : '#00FF00')}">{{(el.first? el.sellPrice : el.buyPrice)}}</td>
+                            <td>{{el.quantity}}</td>
+                            <td>{{el.profit}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="display: inline-block; width: 30%; float: right">
+                <div class="bar" style="background-color: dodgerblue;"></div>
+                <table style="width: 100%; text-align: center;">
+                    <tr>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    <tr ms-for="el in @second.trades" ms-css="{color: @el.color}">
+                        <td>{{el.price}}</td>
+                        <td>{{el.quantity}}</td>
                     </tr>
                 </table>
             </div>
         </div>
-        <div style="display: inline-block; width: 30%; float: right">
-            <div class="bar" style="background-color: dodgerblue;"></div>
-            <table style="width: 100%; text-align: center;">
-                <tr>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                </tr>
-                <tr ms-for="el in @second.trades" ms-css="{color: @el.color}">
-                    <td>{{el.price}}</td>
-                    <td>{{el.quantity}}</td>
-                </tr>
-            </table>
-        </div>
     </div>
-</div>
-<div id="lookup_info" class="tabcontent">
-    <table class="borderless" align="center" style="width: 100%; text-align: center;">
-        <tr>
-            <td class="borderless">
-                <button class="load" ms-on-click="getBalance(first)">{{'Load ' + first.name + ' balance'}}</button>
-                <table style="width: 100%;">
-                    <tr>
-                        <th>Coin</th>
-                        <th>Free</th>
-                        <th>Locked</th>
-                    </tr>
-                    <tr ms-for="el in @first.coins">
-                        <td>{{el.coin}}</td>
-                        <td>{{el.normal}}</td>
-                        <td>{{el.locked}}</td>
-                    </tr>
-                </table>
-            </td>
-            <td class="borderless">
-                <button class="load" ms-on-click="getBalance(second)">{{'Load ' + second.name + ' balance'}}</button>
-                <table style="width: 100%;">
-                    <tr>
-                        <th>Coin</th>
-                        <th>Free</th>
-                        <th>Locked</th>
-                    </tr>
-                    <tr ms-for="el in @second.coins">
-                        <td>{{el.coin}}</td>
-                        <td>{{el.normal}}</td>
-                        <td>{{el.locked}}</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-    <div style="float: left; width: 40%;">
-    </div>
-    <div style="float: right; width: 40%;">
+    <div id="lookup_info" class="tabcontent">
+        <table class="borderless" align="center" style="width: 100%; text-align: center;">
+            <tr>
+                <td class="borderless">
+                    <button class="load" ms-on-click="getBalance(first)">{{'Load ' + first.name + ' balance'}}</button>
+                    <table style="width: 100%;">
+                        <tr>
+                            <th>Coin</th>
+                            <th>Free</th>
+                            <th>Locked</th>
+                        </tr>
+                        <tr ms-for="el in @first.coins">
+                            <td>{{el.coin}}</td>
+                            <td>{{el.normal}}</td>
+                            <td>{{el.locked}}</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="borderless">
+                    <button class="load" ms-on-click="getBalance(second)">{{'Load ' + second.name + ' balance'}}</button>
+                    <table style="width: 100%;">
+                        <tr>
+                            <th>Coin</th>
+                            <th>Free</th>
+                            <th>Locked</th>
+                        </tr>
+                        <tr ms-for="el in @second.coins">
+                            <td>{{el.coin}}</td>
+                            <td>{{el.normal}}</td>
+                            <td>{{el.locked}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
 </body>

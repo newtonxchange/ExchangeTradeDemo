@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -72,4 +71,16 @@ table, th, td {
 table.borderless, th.borderless, td.borderless {
   border: unset;
   border-collapse: unset;
+}
+
+fieldset {
+  display: grid;
+}
+
+#demo {
+  padding: 50px;
+}
+
+input, legend, select, fieldset {
+    margin-bottom: 12px;
 }

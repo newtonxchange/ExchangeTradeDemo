@@ -24,6 +24,10 @@ exports.getExchange = function(exchange, config) {
             return new ccxt.coinegg(config);
         case "cointiger":
             return new ccxt.cointiger(config);
+        case "gateio":
+            return new ccxt.gateio(config);
+        case "zb":
+            return new ccxt.zb(config);
     }
     throw new Error("Unsupported exchange: " + exchange);
 };

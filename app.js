@@ -19,6 +19,7 @@ function newRouter(router) {
         try {
             return await router(req, res, next);
         } catch (e) {
+            console.error(e.stack);
             res.send({
                 code: 1,
                 msg: e.message

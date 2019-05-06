@@ -25,8 +25,6 @@ module.exports = async function (req, res, next) {
     });
     res.send({
         code: 0,
-        data: {
-            balance: (await exc.fetchBalance()).balance.info
-        }
+        data: (await exc.fetchBalance()).info
     });
 };

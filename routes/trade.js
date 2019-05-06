@@ -56,7 +56,7 @@ function getProfitableTrades(bids, asks, first) {
     let buyIndex = 0;
     let sellIndex = 0;
     let trades = [];
-    while (true) {
+    while (buyIndex < bids.length && sellIndex < asks.length) {
         let highestBid = bids[buyIndex];
         let lowestSell = asks[sellIndex];
         let profit = highestBid[0] - lowestSell[0];

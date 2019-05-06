@@ -68,14 +68,14 @@ let controller = avalon.define({
         isRunning: function () {
             return this.loop != null;
         },
-        run: function () {
+        run: async function () {
             try {
-                if (this.loop && !this.loop()) {
-                    this.loop = undefined;
+                if (this.loop) {
+                    await this.loop();
                 }
             } catch (e) {
-                alert(e.message);
-                this.loop = undefined;
+                alert(e);
+                this.stop();
             }
         },
         start(process) {
@@ -133,7 +133,7 @@ let controller = avalon.define({
         try {
             exchange.coins = await api.getBalance(exchange.id, exchange.api_key, exchange.secret_key);
         } catch (e) {
-            alert(e.message);
+            alert(e);
         }
     }
 });
@@ -142,6 +142,7 @@ async function selector(callback, selector) {
     let selected = $(selector + " option:selected");
     callback(selected.val(), selected.text());
     $(selector).change(function () {
+        let selected = $(selector + " option:selected");
         callback(selected.val(), selected.text());
     });
 }
